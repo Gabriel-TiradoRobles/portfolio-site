@@ -45,17 +45,12 @@ nav a {
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: #267CB9;
 }
 
 .pageGrid {
   display: grid;
   grid-template-columns: 20% 80%;
   justify-content: space-between;
-}
-
-#routerPages {
-  /* display: flex; */
-  /* flex-wrap: wrap; */
 }
 </style>

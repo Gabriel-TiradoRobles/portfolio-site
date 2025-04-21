@@ -1,6 +1,6 @@
 <template>
   <div id="navBody">
-    <h1>Gabriel Tirado-Robles</h1>
+    <router-link to="/" id="nameTitle"><h1>Gabriel Tirado-Robles</h1></router-link>
 
     <img src="@/assets/selfImage.jpg" alt="self portrait" id="selfPortrait"><br /><br>
 
@@ -32,5 +32,10 @@
   #selfPortrait {
     max-width: 75%;
     border-radius: 1rem;
+  }
+
+  #nameTitle {
+    color: #267CB9;
+    text-decoration: none;
   }
 </style>
