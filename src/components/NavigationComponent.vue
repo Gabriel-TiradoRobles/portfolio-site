@@ -8,8 +8,6 @@
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate, excepturi fugiat? Natus hic nisi temporibus repellat? Magnam tempore veniam sapiente at possimus delectus quo non sit omnis. Praesentium, excepturi facere!
     </p>
 
-
-    <router-link to="/">Home Page</router-link>
     <router-link to="/projects"><h4>Programming Projects</h4></router-link>
     <router-link to="/presentations"><h4>Papers and Presentations</h4></router-link>
 

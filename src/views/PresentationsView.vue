@@ -1,7 +1,7 @@
 <template>
   <div class="project">
     <h1>School Presentations and Papers</h1>
-    <div>This page contains a list of any presentation I have completed for the completion of my Bachelor's degree.</div>
+    <div>This page contains a list of any presentations or ethics papers I have created for the completion of my Bachelor's degree.</div>
     
     <hr style="width: 95%;">
     <h2>Ethics Papers</h2>

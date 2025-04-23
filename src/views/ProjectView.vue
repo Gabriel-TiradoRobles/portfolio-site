@@ -50,6 +50,8 @@ export default {
     display: grid;
     grid-template-columns: auto auto;
     justify-content: space-evenly;
+    row-gap: 2rem;
+    margin-top: 2rem;
 
     /* background-color: aquamarine; */
   }

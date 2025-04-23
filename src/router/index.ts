@@ -4,8 +4,9 @@ import HomeView from '../views/HomeView.vue'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'projects',
+    component: () => import(/* webpackChunkName: "projects" */ '../views/ProjectView.vue'),
+    alias: '/projects'
   },
   {
     path: '/about',
@@ -16,19 +17,25 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
-    path: '/projects',
-    name: 'projects',
-    component: () => import(/* webpackChunkName: "projects" */ '../views/ProjectView.vue')
+    path: '/projects/:id',
+    name: 'project',
+    component: () => import(/* webpackChunkName: "projects" */ '../views/ProjectPage.vue')
   },
   {
     path: '/presentations',
     name: 'presentations',
     component: () => import('@/views/PresentationsView.vue')
+  },
+  // Catch all 404
+  {
+    path: '/:catchAll(.*)',
+    name: '404NotFound',
+    component: () => import('@/views/NotFound.vue')
   }
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(process.env.BASE_URL),
   routes
 })
 
