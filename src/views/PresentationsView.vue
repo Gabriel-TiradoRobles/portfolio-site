@@ -9,11 +9,11 @@
       <PresentationCard 
       v-for="paper in ethicsPapers"
       :key="paper.id"
-      :title="paper.presTitle"
-      :className="paper.presClassName"
-      :classCode="paper.presClassCode"
-      :grade="paper.presGrade"
-      :link="paper.presLink"/>
+      :title="paper.title"
+      :className="paper.courseCode.courseName"
+      :classCode="paper.courseCode.courseCode"
+      :grade="paper.courseGrade"
+      :link="paper.fileLink"/>
     </div>
 
     <hr style="width: 95%;">
@@ -22,18 +22,18 @@
       <PresentationCard 
       v-for="presentation in presentations"
       :key="presentation.id"
-      :title="presentation.presTitle"
-      :className="presentation.presClassName"
-      :classCode="presentation.presClassCode"
-      :grade="presentation.presGrade"
-      :link="presentation.presLink"/>
+      :title="presentation.title"
+      :className="presentation.courseCode.courseName"
+      :classCode="presentation.courseCode.courseCode"
+      :grade="presentation.courseGrade"
+      :link="presentation.fileLink"/>
     </div>
 
   </div>
 </template>
 
-<script lang="ts">
-import { ref } from 'vue';
+<script>
+import { onMounted, Ref, ref } from 'vue';
 import PresentationCard from '@/components/PresentationCard.vue';
 
 export default {
@@ -43,23 +43,30 @@ export default {
 
   setup() {
     const projectCount = ref(0);
+    const papersAndPresentations = ref([]);
 
-    const ethicsPapers = ref([
-      {id: 0, presTitle: "Information Explosion, Ai, and Privacy", presClassName: "Procedural Programming", presClassCode: "CSCI-235", presGrade: "A", presLink: "/pdf_files/Gabriel Tirado - Ethics Paper CSCI235.pdf"},
-      {id: 1, presTitle: "Ethics of Copying Code", presClassName: "Survey of Scripting Languages", presClassCode: "CSCI-301", presGrade: "A", presLink: "/pdf_files/Gabriel Tirado - Ethics Paper CSCI301.pdf"},
-      {id: 2, presTitle: "The Ethics of Artificial Intelligence", presClassName: "Object Oriented Programming", presClassCode: "CSCI-325", presGrade: "A", presLink: "/pdf_files/Gabriel Tirado - Ethics Paper CSCI325.pdf"},
-    ])
+    const ethicsPapers = ref([])
+    const presentations = ref([])
 
-    const presentations = ref([
-      {id: 0, presTitle: "Intel 64-bit Architecture Paging Presentation", presClassName: "Procedural Programming", presClassCode: "CSCI-235", presGrade: "A", presLink: "/pdf_files/Gabriel Tirado - Paging Presentation CSCI325.pdf"},
-      {id: 1, presTitle: "IST-166 Final Project Presentation", presClassName: "Survey of Scripting Languages", presClassCode: "CSCI-301", presGrade: "A", presLink: "/pdf_files/Gabriel Tirado - IST166 Final Project.pdf"},
-    ])
+    // Load database data for papers/presentations into corresponding arrays
+    onMounted(async () => {
+      console.log("Entered projects page");
+      await fetch('http://localhost:8000/portInfo/papers-and-presentations/')
+        .then(res => res.json())
+        .then(data => {
+          for (var i = 0; i < data.length; i++) {
+            if (data[i].type == 'Paper') {
+              ethicsPapers.value.push(data[i])
+            }
+            else {
+              presentations.value.push(data[i])
+            }
+          }
+        })
+        .catch(err => console.log(err.message))
+    })
 
-    return { projectCount, ethicsPapers, presentations }
-  },
-
-  mounted() {
-    console.log("Entered projects page");
+    return { projectCount, ethicsPapers, presentations, papersAndPresentations }
   },
 }
 </script>

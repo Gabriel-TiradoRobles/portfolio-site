@@ -1,10 +1,10 @@
 <template>
-    <router-link :to="{ name: 'project', params: {id: '5'} }" style="text-decoration: none;">
+    <router-link :to="{ name: 'project', params: {id: projectID} }" style="text-decoration: none;">
         <div class="projCard">
-        <div id="cardInfo">
-            <h2 id="projCardTitle">{{ projectTitle }} | {{ projectType }} Project</h2>
-            <div>Language(s) Used: <span v-for="language in projectLanguages" :key="language">{{ language }}</span></div><br>
-        </div>
+            <div id="cardInfo">
+                <h2 id="projCardTitle">{{ projectTitle }} | {{ projectType }} Project</h2>
+                <div>Language(s) Used: <span v-for="language in projectLanguages" :key="language">{{ language }}</span></div><br>
+            </div>
 
             <img src="https://picsum.photos/800/500" alt="Testing" id="cardThumbnail">
         </div>
@@ -18,19 +18,21 @@ import { ref } from 'vue';
 export default {
 
     props: {
+        id: Number,
         title: String,
         languages: Array,
         type: String,
         thumbnail: String
     },
     setup(props) {
+        const projectID = ref(props.id);
         const projectTitle = ref(props.title);
         const projectLanguages = ref(props.languages);
         const projectType = ref(props.type);
         const projectThumbnail = ref(props.thumbnail);
 
         
-        return { projectTitle, projectLanguages, projectType, projectThumbnail }
+        return { projectID, projectTitle, projectLanguages, projectType, projectThumbnail }
     }
 }
 </script>

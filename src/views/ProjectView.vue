@@ -9,17 +9,18 @@
       <ProjectCard 
       v-for="project in projects"
       :key="project.id"
-      :title="project.title"
-      :languages="project.languages"
+      :id="project.id"
+      :title="project.projTitle"
+      :languages="project.projLanguages"
       :type="project.projectType"
-      :thumbnail="project.thumbnail"/>
+      :thumbnail="project.projThumbnail"/>
     </div>
     
   </div>
 </template>
 
-<script lang="ts">
-import { ref } from 'vue';
+<script>
+import { onMounted, ref } from 'vue';
 import ProjectCard from '@/components/ProjectCard.vue';
 
 export default {
@@ -30,11 +31,17 @@ export default {
   setup() {
     const projectCount = ref(0);
 
-    const projects = ref([
-      {id: 0, title: "Job Web Scraper", languages: ["Python"], projectType: "School", thumbnail: "Placeholder"},
-      {id: 1, title: "Inventory Manager", languages: ["Java"], projectType: "School", thumbnail: "Placeholder"},
-      {id: 2, title: "Portfolio Website", languages: ["HTML, CSS, Javascript"], projectType: "Personal", thumbnail: "Placeholder"},
-    ])
+    const projects = ref([])
+
+    // Load database data for papers/presentations into corresponding arrays
+    onMounted(async () => {
+      console.log("Entered projects page");
+      await fetch('http://localhost:8000/portInfo/projects/')
+        .then(res => res.json())
+        .then(data => projects.value = data)
+        .then(() => console.log(projects.value[0]))
+        .catch(err => console.log(err.message))
+    })
 
     return { projectCount, projects }
   },
