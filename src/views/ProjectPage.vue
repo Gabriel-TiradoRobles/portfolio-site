@@ -20,20 +20,12 @@
         <h2>How to compile and run the program</h2>
         <p v-html="projectInfo.projCompileInfo"></p>
 
-        <!-- <div class="codeSnippet">
-            <div>cd 'test/test/test'</div><br>
-
-            <div>npm run tester</div>
-        </div> -->
-
         <h2>UI Design</h2>
         <p v-html="projectInfo.projUiInfo"></p>
 
         <h2>Additional Considerations</h2>
         <p v-html="projectInfo.projAddConsiderations"></p>
     </div>
-    
-
 </template>
 
 <script>
@@ -42,7 +34,7 @@ import { useRoute } from 'vue-router';
 
 
 export default {
-    setup (props) {
+    setup () {
         const route = useRoute();
 
         const project = ref([]);

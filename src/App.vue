@@ -8,15 +8,19 @@
       <router-view/>
     </span>
   </div>
+
+  <TopButtonComponent />
   
 </template>
 
 <script lang="ts">
   import NavigationComponent from './components/NavigationComponent.vue';
+  import TopButtonComponent from '@/components/TopButtonComponent.vue';
 
   export default {
     components: {
-      NavigationComponent
+      NavigationComponent,
+      TopButtonComponent
     }
   }
 </script>

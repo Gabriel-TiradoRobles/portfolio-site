@@ -35,20 +35,15 @@ export default {
 
     // Load database data for papers/presentations into corresponding arrays
     onMounted(async () => {
-      console.log("Entered projects page");
       await fetch('http://localhost:8000/portInfo/projects/')
         .then(res => res.json())
         .then(data => projects.value = data)
-        .then(() => console.log(projects.value[0]))
+        // .then(() => console.log(projects.value[0]))
         .catch(err => console.log(err.message))
     })
 
     return { projectCount, projects }
-  },
-
-  mounted() {
-    console.log("Entered projects page");
-  },
+  }
 }
 </script>
 
